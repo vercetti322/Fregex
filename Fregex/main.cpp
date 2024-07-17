@@ -9,7 +9,14 @@
 #include "FregAlgo.h"
 #include "FregStructs.h"
 
-int main()
-{
-	std::cout << "Init build successful!!" << std::endl;
+int main() {
+    std::cout << "Init build successful!!" << std::endl;
+    Fregex::init_symbol_hash(Fregex::hash);
+
+    for (const auto& pair : Fregex::get_hash()) 
+    {
+        std::cout << pair.first << " --> " << static_cast<int>(pair.second) << std::endl;
+    }
+
+    return 0;
 }
