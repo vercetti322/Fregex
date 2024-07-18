@@ -25,27 +25,17 @@ namespace Fregex
     {
         // init the stack
         std::stack<char> operators;
-
-        // get the size of postfix
-        uint16_t postfix_size = 0;
-        for (const auto& ch : regex)
-            if (isalnum(ch) || Fregex::operand_set.find(ch) != Fregex::operand_set.end())
-            {
-                postfix_size++;
-            }
         
         // init the postfix string
-        std::string postfix(postfix_size, '_');
+        std::string postfix = "";
 
         // going thru our input
-        int iter = 0; // for output
         for (size_t i = 0; i < regex.size(); i++)
         {
             char c = regex[i];
             if (isalnum(c))
             {
-                postfix[iter] = c; 
-                iter++;
+                postfix += c;
             }
 
             else if (c == '(')
@@ -59,8 +49,7 @@ namespace Fregex
                 // remove everything between '(' & ')' from stack
                 while (!operators.empty() && operators.top() != '(')
                 {
-                    postfix[iter] = operators.top();
-                    iter++;
+                    postfix += operators.top();
                     operators.pop();
                 }
 
@@ -72,8 +61,7 @@ namespace Fregex
                 // according to operator preference, pop stuff out and push the incoming operator
                 while (!operators.empty() && Fregex::operand_set[c] <= Fregex::operand_set[operators.top()])
                 {
-                    postfix[iter] = operators.top();
-                    iter++;
+                    postfix += operators.top();
                     operators.pop();
 
                 }
@@ -84,8 +72,7 @@ namespace Fregex
 
         while (!operators.empty())
         {
-            postfix[iter] = operators.top();
-            iter++;
+            postfix += operators.top();
             operators.pop();
         }
 
