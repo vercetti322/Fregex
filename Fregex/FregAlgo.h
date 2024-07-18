@@ -16,7 +16,8 @@ namespace Fregex
 {
 	class Algo
 	{
-
+	public:
+		void get_NFA_from_regex(std::string& regex, NFA& NFA);
 	};
 }
 

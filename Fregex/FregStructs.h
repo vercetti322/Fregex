@@ -25,9 +25,14 @@ namespace Fregex
 
 	// symbol => 1 byte int mapping
 	extern std::unordered_map<char, uint8_t> hash;
+
 	extern void init_symbol_hash(std::unordered_map<char, uint8_t>& hash);
+	
 	extern const std::unordered_map<char, uint8_t>& get_hash();
 
+	extern uint32_t pack_transition_key(uint8_t symbol, uint16_t state);
+
+	extern std::pair<uint8_t, uint16_t> unpack_transition_key(uint32_t key);
 
 	class NFA
 	{
@@ -36,10 +41,14 @@ namespace Fregex
 		std::unordered_set<uint16_t> states;
 
 		// status bitset (0 for non-accepting & 1 for accepting)
+		std::unordered_set<bool> status; // true for accepting, false for not accepting
+
+		// start state
+		uint8_t start;
 
 		// transition table (sparse vector)
-	public:
-		void get_NFA_from_regex(std::string& regex);
+		// uint32_t can be unpacked to get uint8_t & uint16_t
+		std::unordered_map<uint32_t, std::unordered_set<uint16_t>> transitions;
 	};
 
 	class DFA
@@ -49,9 +58,18 @@ namespace Fregex
 		std::unordered_set<uint16_t> states;
 
 		// status bitset (0 for non-accepting & 1 for accepting)
+		std::unordered_set<bool> status; // true for accepting, false for not accepting
+
+		// start state
+		uint8_t start;
 
 		// transition table (sparse vector)
+		// uint32_t can be unpacked to get uint8_t & uint16_t
+		std::unordered_map<uint32_t, uint16_t> transitions;
+
 	public:
 		void get_DFA_from_regex(std::string& regex);
+
+		bool string_acceptance(std::string& input);
 	};
 }
