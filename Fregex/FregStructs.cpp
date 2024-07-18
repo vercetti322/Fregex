@@ -3,7 +3,12 @@
 namespace Fregex
 {
 	// hash to be init
-	std::unordered_map<char, uint8_t> Fregex::hash;
+	std::unordered_map<char, uint8_t> Fregex::symbol_hash;
+
+	// operand priority hash
+	std::unordered_map<char, uint8_t> Fregex::operand_set = {
+		{'|', 3}, {'.', 4}, {'*', 2}, {'+', 1}, {'?', 1}
+	};
 
 	// init the hash
 	void Fregex::init_symbol_hash(std::unordered_map<char, uint8_t>& hash)
@@ -26,7 +31,7 @@ namespace Fregex
 	// return the character hash
 	const std::unordered_map<char, uint8_t>& get_hash()
 	{
-		return hash;
+		return symbol_hash;
 	}
 
 	// pack the key using input symbol and current state for transition map
@@ -40,7 +45,6 @@ namespace Fregex
 	{
 		uint8_t symbol = static_cast<uint8_t>(key >> 16);
 		uint16_t state = static_cast<uint16_t>(key & 0xFFFF);
-		return {symbol, state};
-
+		return { symbol, state };
 	}
 }

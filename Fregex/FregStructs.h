@@ -24,7 +24,10 @@ namespace Fregex
 	constexpr uint16_t MAX_STATE_COUNT = UINT16_MAX;
 
 	// symbol => 1 byte int mapping
-	extern std::unordered_map<char, uint8_t> hash;
+	extern std::unordered_map<char, uint8_t> symbol_hash;
+
+	// list of operands with priorites=> |, *, +, ?, .
+	extern std::unordered_map<char, uint8_t> operand_set;
 
 	extern void init_symbol_hash(std::unordered_map<char, uint8_t>& hash);
 	

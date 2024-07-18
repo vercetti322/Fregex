@@ -8,22 +8,22 @@
 */
 
 // include directives
-#include <iostream>
-#include <emmintrin.h> // for SSE2 vectorization
 #include "FregStructs.h"
+#include <set>
+#include <stack>
 
 namespace Fregex 
 {
-	class Algo
-	{
-	public:
-		void infix_to_postfix(std::string& regex);
+		extern std::string infix_to_postfix(const std::string& regex, const std::unordered_map<char, uint8_t>& operand_set);
 
-		void get_NFA_from_regex(std::string& regex, NFA& NFA);
+		extern void get_NFA_from_regex(std::string& regex, NFA& NFA);
 
-		void get_DFA_from_NFA(NFA& NFA, DFA& DFA);
+		extern void get_DFA_from_NFA(NFA& NFA, DFA& DFA);
 
-		bool string_acceptance(std::string& input, DFA& DFA);
-	};
+		extern bool string_acceptance(std::string& input, DFA& DFA);
+
+		extern bool is_operator(char c);
+
+		extern void insert_explicit_concat(std::string& regex);
 }
 

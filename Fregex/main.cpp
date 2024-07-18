@@ -11,12 +11,10 @@
 
 int main() {
     std::cout << "Init build successful!!" << std::endl;
-    Fregex::init_symbol_hash(Fregex::hash);
-
-    for (const auto& pair : Fregex::get_hash()) 
-    {
-        std::cout << pair.first << " --> " << static_cast<int>(pair.second) << std::endl;
-    }
-
+    std::string regex = "((((b)|((a)(b)))+)|((((b)|((a)(b)))*)(a)))";
+    Fregex::insert_explicit_concat(regex);
+    std::cout << regex << std::endl;
+    std::string postfix = Fregex::infix_to_postfix(regex, Fregex::operand_set);
+    std::cout << postfix << std::endl;
     return 0;
 }
