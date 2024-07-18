@@ -43,21 +43,4 @@ namespace Fregex
 		return {symbol, state};
 
 	}
-
-
-	void NFA::get_NFA_from_regex(std::string& regex)
-	{
-
-	}
-
-	void DFA::get_DFA_from_regex(std::string& regex)
-	{
-
-	}
-
-	bool DFA::string_acceptance(std::string& input)
-	{
-		
-	}
-
 }

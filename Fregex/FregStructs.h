@@ -66,10 +66,5 @@ namespace Fregex
 		// transition table (sparse vector)
 		// uint32_t can be unpacked to get uint8_t & uint16_t
 		std::unordered_map<uint32_t, uint16_t> transitions;
-
-	public:
-		void get_DFA_from_regex(std::string& regex);
-
-		bool string_acceptance(std::string& input);
 	};
 }

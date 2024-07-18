@@ -17,7 +17,13 @@ namespace Fregex
 	class Algo
 	{
 	public:
+		void infix_to_postfix(std::string& regex);
+
 		void get_NFA_from_regex(std::string& regex, NFA& NFA);
+
+		void get_DFA_from_NFA(NFA& NFA, DFA& DFA);
+
+		bool string_acceptance(std::string& input, DFA& DFA);
 	};
 }
 
