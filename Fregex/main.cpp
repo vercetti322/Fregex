@@ -70,8 +70,6 @@ int main() {
     for (auto& regex : regex_list) 
     {
         Fregex::insert_explicit_concat(regex);
-        std::string postfix = Fregex::infix_to_postfix(regex, Fregex::operand_set);
-        output_list.push_back(postfix);
     }
     
     write_to_file(output_file, output_list);

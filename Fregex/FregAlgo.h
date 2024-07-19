@@ -14,8 +14,6 @@
 
 namespace Fregex 
 {
-		extern std::string infix_to_postfix(const std::string& regex, const std::unordered_map<char, uint8_t>& operand_set);
-
 		extern void get_NFA_from_regex(std::string& regex, NFA& NFA);
 
 		extern void get_DFA_from_NFA(NFA& NFA, DFA& DFA);
