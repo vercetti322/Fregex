@@ -6,7 +6,6 @@
 * parsed against the tokens to get correct pairs.
 */
 
-#include "FregAlgo.h"
 #include "FregStructs.h"
 #include <fstream>
 

@@ -139,11 +139,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="FregAlgo.h" />
     <ClInclude Include="FregStructs.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="FregAlgo.cpp" />
     <ClCompile Include="FregStructs.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
