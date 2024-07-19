@@ -66,12 +66,10 @@ int main() {
     std::string input_file = "input.txt";
     std::string output_file = "output.txt";
     std::vector<std::string> regex_list = read_regex_file(input_file);
-    std::vector<std::string> output_list;
     for (auto& regex : regex_list) 
     {
-        Fregex::insert_explicit_concat(regex);
     }
     
-    write_to_file(output_file, output_list);
+    write_to_file(output_file, regex_list);
     return 0;
 }
