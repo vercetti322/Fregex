@@ -64,11 +64,15 @@ int main() {
     std::cout << "Init build successful!!" << std::endl << std::endl;
     std::string input_file = "input.txt";
     std::string output_file = "output.txt";
+    std::vector<std::string> augment_list;
     std::vector<std::string> regex_list = read_regex_file(input_file);
     for (auto& regex : regex_list) 
     {
+        Fregex::Regex re = regex;
+        re.augment();
+        augment_list.push_back(re.get_regex());
     }
     
-    write_to_file(output_file, regex_list);
+    write_to_file(output_file, augment_list);
     return 0;
 }

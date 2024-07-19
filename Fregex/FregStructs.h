@@ -10,6 +10,7 @@
 // include directives
 #include <iostream>
 #include <vector>
+#include <algorithm>
 #include <unordered_map>
 #include <unordered_set>
 #include <string>
@@ -17,38 +18,26 @@
 
 namespace Fregex
 {
-	
-	struct NFA
-	{
-	private:
-		// set of states
-		std::unordered_set<uint16_t> states;
-
-		// status bitset (0 for non-accepting & 1 for accepting)
-		std::unordered_set<bool> status; // true for accepting, false for not accepting
-
-		// start state
-		uint8_t start;
-
-		// transition table (sparse vector)
-		// uint32_t can be unpacked to get uint8_t & uint16_t
-		std::unordered_map<uint32_t, std::unordered_set<uint16_t>> transitions;
-	};
-
 	struct DFA
 	{
 	private:
-		// set of states
-		std::unordered_set<uint16_t> states;
+	public:
+	};
 
-		// status bitset (0 for non-accepting & 1 for accepting)
-		std::unordered_set<bool> status; // true for accepting, false for not accepting
+	struct Regex
+	{
+	private:
+		// regex
+		std::string regex;
+		
+	public:
+		// init the regex struct
+		Regex(std::string& input);
 
-		// start state
-		uint8_t start;
-
-		// transition table (sparse vector)
-		// uint32_t can be unpacked to get uint8_t & uint16_t
-		std::unordered_map<uint32_t, uint16_t> transitions;
+		// augment the regex
+		void augment();
+		
+		// getter for the private regex
+		std::string get_regex();
 	};
 }
