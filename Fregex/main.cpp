@@ -1,4 +1,4 @@
-/*
+﻿/*
 * Author: Jatin Jindal
 * Github: vercetti322
 * 
@@ -7,7 +7,6 @@
 */
 
 #include "FregStructs.h"
-#include <fstream>
 
 // read from file and store regex pattern
 static std::vector<std::string> read_regex_file(const std::string& filename)
@@ -61,18 +60,22 @@ static void write_to_file(const std::string& filename, const std::vector<std::st
 }
 
 int main() {
-    std::cout << "Init build successful!!" << std::endl << std::endl;
-    std::string input_file = "input.txt";
-    std::string output_file = "output.txt";
-    std::vector<std::string> augment_list;
-    std::vector<std::string> regex_list = read_regex_file(input_file);
-    for (auto& regex : regex_list) 
-    {
-        Fregex::Regex re = regex;
-        re.augment();
-        augment_list.push_back(re.get_regex());
-    }
+    // make an AST node with 2 children;
+    auto root = std::make_unique<Fregex::AST>(u8'.', Fregex::NodeType::BinaryOperator);
+
+    auto left = std::make_unique<Fregex::AST>(u8'*', Fregex::NodeType::UnaryOperator);
+
+    auto leaf = std::make_unique<Fregex::AST>(u8'a', Fregex::NodeType::LeafSymbol);
+
+    auto right = std::make_unique<Fregex::AST>(u8'b', Fregex::NodeType::LeafSymbol);
+
+    left->add_unary_child(std::move(leaf));
+
+    root->add_left_child(std::move(left));
+
+    root->add_right_child(std::move(right));
     
-    write_to_file(output_file, augment_list);
+    root->print_subtree(0);
+
     return 0;
 }
